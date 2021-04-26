@@ -1,0 +1,39 @@
+#bt1{
+  background-color:rgba(31, 29, 29, 0.541);
+  width: 100%;
+  padding-top: 25px;
+  height: 80px;
+ position: absolute;
+ top: 120px;
+ left: 0px;
+ border: 0px;
+}
+.imgs{
+z-index: 10;
+ 
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0,0,0,.5);
+  color: rgb(255, 255, 255);
+  }
+
+  .btn1{
+    background-color: green;
+    color: white;
+    width: 50%;
+  
+    height: 70px;
+    border: none;
+    margin: auto
+  }
+
+  .btn2{
+    background-color: white;
+    color: black;
+    width: 33.3%;
+  
+    height: 70px;
+    border: none;
+    margin: auto
+  }
