@@ -4,12 +4,9 @@ import {useState} from 'react'
 import Price from './Price'
 import { FaThLarge } from 'react-icons/fa'
 
-const Sales = ({product}) => {
+const Sales = ({products, onAdd}) => {
 //modal handler
-    const bclicks=(product)=>{
-        console.log(product.name)
-    } 
-    const [show, setShow] = useState(false);
+ const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -17,20 +14,20 @@ const Sales = ({product}) => {
    
     return (
        <div>
-       <div className="row">
-      <div className="col-8">
+       
+     
       
         <Header /> 
         <div className="card" style={{minHeight:"500px"}}>
       <div className="card-body">
       <div className="row ml-auto mr-auto">
-       {product.map((product)=>(
+       {products.map((products)=>(
          
            <div className="col-3 border border-success border-rounded" >
 
-           <img key={product.id} src={product.pics} height="200" width="200" className="pt-2 pb-2 imgs" onClick={handleShow} style={{cursor: "pointer"}}  />
+           <img key={products.id} src={products.pics} height="200" width="200" className="pt-2 pb-2 imgs" onClick={handleShow} style={{cursor: "pointer"}}  />
 
-           <button id="bt1" className="text-white" onClick={()=>bclicks(product)} >{product.name}</button>
+           <button id="bt1" className="text-white" onClick={()=>onAdd(products)} >{products.name}</button>
            </div> 
            
        ))}
@@ -63,12 +60,10 @@ const Sales = ({product}) => {
             
           
            
-        </div>
+       
 
-        <div className="col-4">
-            <Price product={product} />
-        </div>
-        </div>
+        
+        
         </div>
     )
 }

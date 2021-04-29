@@ -1,33 +1,55 @@
 import Priceheader from './Priceheader'
 import {Modal, Button} from 'react-bootstrap';
 import {useState} from 'react'
-const Price = (product) => {
+const Price = ({proItems, onAdd}) => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    return (
+    const itemPrice = proItems.reduce((a, c) => a + c.price * c.qty, 0)
+    const taxPrice = itemPrice * 0.75
+    const itemTotal = itemPrice + taxPrice;
+        return (
         <div className="mr-0 ml-0">
            <Priceheader/> 
             <div className="card">
                 <div className="card-body" style={{minHeight:"500px", border:"none", }}>
-                <p onClick={handleShow}>Coke <span className="float-right">12.34</span></p>
+                {proItems.length === 0 && <p></p>}
+                <p onClick={handleShow}>
+                {proItems.map((item)=>(
+                    <>
+                    <div key={item.id} className="row">
+                        <div className="col-6">{item.name}</div> 
+                       <div className="4 float-right ml-auto">
+                       {item.price}
+                       </div>
+               
+                    </div>
+                    <hr></hr>
+                   </>
+                ))}
+                 
+                 </p>
+                
+
+                   {proItems.length !==0 &&(
+                       <>
+                       <p style={{marginTop:"85px"}}>Sub Total <span className="float-right">{itemPrice.toFixed(2)}</span></p>
                 <hr/>
-
-                <p></p>
-
-                <p></p>
-
-
-                <p style={{marginTop:"210px"}}>Total <span className="float-right">50.34</span></p>
+                
+                <p style={{marginTop:"5px"}}>Tax <span className="float-right">{taxPrice.toFixed(2)}</span></p>
                 <hr/>
+                <p style={{marginTop:"5px"}}>Total <span className="float-right">{itemTotal.toFixed(2)}</span></p>
+                <hr/>
+                </>
+                   )} 
                 
                 </div>
             </div>
             <button className="btn1">OPEN TICKET</button>
             
           
-            <button className="btn1">CHARGE {product.price}</button>
+            <button className="btn1">CHARGE</button>
             <Modal show={show} onHide={handleClose}>
        
        <Modal.Body>

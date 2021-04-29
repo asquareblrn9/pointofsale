@@ -3,67 +3,31 @@ import Sales from './components/Sales'
 import Price from './components/Price'
 import {useState} from  'react'
 import './App.css'
+import Data from './data'
 
 function App() {
-  
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: 'coke',
-      price: 12.32,
-      category: 'drinks',
-      pics: 'images/coke.jpg',
-    },
-    {
-      id: 2,
-      name: 'fanta',
-      price: 13.32,
-      category: 'drinks',
-      pics: 'images/fanta.jpg',
-      
-    },
-    {
-      id: 3,
-      name: 'sprite',
-      price: 14.32,
-      category: 'drinks',
-      pics: 'images/sprite.jpg',
-      
-    },
-    {
-      id: 4,
-      name: 'cokee',
-      price: 15.32,
-      category: 'drinks',
-      pics: 'images/cokee.jpg',
-      
-    },
-    {
-      id: 5,
-      name: 'schweps',
-      price: 12.32,
-      category: 'drinks',
-      pics: 'images/schweps.jpg',
-      
-    },
-    {
-      id: 6,
-      name: 'blacks',
-      price: 23.32,
-      category: 'drinks',
-      pics: 'images/blacks.jpg',
-      
+  const {products} = Data;
+  const [proItems, setProducts] = useState([])
+
+  const onAdd = (products) => {
+    const exist = proItems.find(x => x.id === products.id);
+    if(exist){
+      setProducts(proItems.map(x => x.id === products.id ? {...exist, qty: exist.qty + 1}: x))
+    }else{
+      setProducts([...proItems, {...products, qty: 1}])
     }
-
-
-  ])
+  }
   return (
     <div className="container-fluid">
-    
-  
-          {products.length > 0 ? <Sales product={products}/>:"No products available"}
-    
-   
+    <div className="row">
+    <div className="col-8">
+          <Sales  products={products} onAdd={onAdd}/>
+    </div>
+
+    <div className="col-4">
+            <Price proItems={proItems} onAdd={onAdd}  />
+        </div>
+   </div>
    
     </div>
     
